@@ -1,0 +1,119 @@
+<style>
+  :root {
+      --primary-color: #00c34e; /* Verde Alegra */
+      --bg-color: #f9f7f2;      /* Arena muy claro */
+      --card-bg: #ffffff;
+      --text-main: #2d2d2d;
+      --text-muted: #6b6b6b;
+      --accent-beige: #e5e0d5;  /* Tono arena para bordes/detalles */
+  }
+
+  * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+  }
+
+  body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+  }
+
+  .main-card {
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 450px;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+      border: 1px solid var(--accent-beige);
+  }
+
+  header {
+      text-align: center;
+      margin-bottom: 30px;
+  }
+
+  .brand img {
+      height: 35px;
+      margin-bottom: 15px;
+  }
+
+  h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+  }
+
+  p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+  }
+
+  .input-group {
+      margin-bottom: 20px;
+  }
+
+  label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-main);
+  }
+
+  input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--accent-beige);
+      border-radius: 8px;
+      background-color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: border-color 0.3s;
+  }
+
+  input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+  }
+
+  button {
+      width: 100%;
+      padding: 14px;
+      background-color: var(--text-main);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.3s;
+  }
+
+  button:hover {
+      background-color: #000;
+      transform: translateY(-2px);
+  }
+
+  button:disabled {
+      background-color: var(--accent-beige);
+      cursor: not-allowed;
+  }
+
+  #statusMessage {
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      text-align: center;
+  }
+
+  .status-success { background: #e7f9ee; color: #1e7e44; }
+  .status-error { background: #fdeaea; color: #c0392b; }
+  .hidden { display: none; }
+</style>

@@ -1,0 +1,19 @@
+# ========================================================================
+# GITIGNORE: RETO TÉCNICO ALEGRA
+* ========================================================================
+
+# Extensiones de VS Code y carpetas de configuración local
+.vscode/
+.idea/
+.DS_Store
+*.log
+
+# Archivos temporales de sistema
+thumbs.db
+desktop.ini
+
+# Credenciales o archivos de entorno
+.clasp.json
+credentials.json
+build/
+dist/

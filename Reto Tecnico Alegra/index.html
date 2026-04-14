@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Hub | Alegra</title>
+    <?!= HtmlService.createHtmlOutputFromFile('Estilos').getContent(); ?>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main-card">
+        <header>
+            <div class="brand">
+                <img src="https://ayuda.alegra.com/hubfs/ALEGRA%20LOGO.png" alt="Alegra Logo">
+            </div>
+            <h1>Centro de Experiencia</h1>
+            <p>Tu feedback nos ayuda a diseñar el futuro de nuestras herramientas.</p>
+        </header>
+
+        <form id="feedbackForm">
+            <div class="input-group">
+                <label for="nombre">Nombre Completo</label>
+                <input type="text" id="nombre" placeholder="Ej. Alexander García">
+            </div>
+
+            <div class="input-group">
+                <label for="producto">Producto</label>
+                <select id="producto" required>
+                    <option value="" disabled selected>Selecciona un producto</option>
+                    <option value="Alegra POS">Alegra POS</option>
+                    <option value="Alegra Contabilidad">Alegra Contabilidad</option>
+                    <option value="Alegra Nómina">Alegra Nómina</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="comentario">Comentario</label>
+                <textarea id="comentario" rows="4" placeholder="¿Cómo fue tu experiencia hoy?" required></textarea>
+            </div>
+
+            <button type="submit" id="btnEnviar">
+                <span class="btn-text">Enviar Feedback</span>
+                <div class="loader hidden"></div>
+            </button>
+        </form>
+          <div style="clear: both; display: block; width: 100%; height: 1px; margin-top: 20px;"></div>
+          <div class="flex flex-col items-center mt-10 pb-4">
+              <span class="text-[10px] text-gray-400 uppercase tracking-tighter mb-1">Acceso Administrativo:</span>
+              <a target="_top" href="<?= ScriptApp.getService().getUrl() ?>?page=metrics" 
+                class="text-xs font-medium text-gray-500 hover:text-[#29A9A1] transition-colors duration-200 flex items-center border-b border-transparent hover:border-[#29A9A1]">
+                  Metricas
+              </a>
+          </div>
+        <div id="statusMessage" class="hidden"></div>
+    </div>
+
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbxzYLFVtmfKLroya7Pz-pUhu6yJNgCbyZIi6hPlL820AGTyMpk2UtRc3KAki8H9rxkW/exec";
+
+        document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btnEnviar');
+            const status = document.getElementById('statusMessage');
+        
+            // UI Feedback
+            btn.disabled = true;
+            btn.innerText = "Procesando con IA...";
+
+            const payload = {
+                nombre: document.getElementById('nombre').value,
+                producto: document.getElementById('producto').value,
+                comentario: document.getElementById('comentario').value
+            };
+
+            try {
+                // Usamos mode: 'no-cors' por la naturaleza de Google Apps Script
+                await fetch(API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                    'Content-Type': 'text/plain'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                status.innerText = "¡Gracias! Tu comentario ha sido analizado y guardado con éxito.";
+                status.className = "status-success";
+                document.getElementById('feedbackForm').reset();
+
+            } catch (err) {
+                status.innerText = "Hubo un problema al conectar con el servidor.";
+                status.className = "status-error";
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Enviar Feedback";
+                setTimeout(() => status.className = "hidden", 5000);
+            }
+        });
+    </script>
+</body>
+</html>
