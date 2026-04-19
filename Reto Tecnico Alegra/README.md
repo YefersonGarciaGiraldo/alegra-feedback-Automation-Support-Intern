@@ -4,7 +4,6 @@
 * DATOS DEL CANDIDATO:
 * - Nombre: Yeferson Alexander García Giraldo
 * - Rol: Automation Support Intern (Aprendiz SENA)
-* - Contacto: yeffergarciagi4@gmail.com | 311 384 5892
 * ========================================================================
 
 * ------------------------------------------------------------------------
